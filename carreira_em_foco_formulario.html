@@ -1,0 +1,320 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{max-width:620px;margin:0 auto;padding:2rem 1rem}
+.header{text-align:center;padding:2rem 1.5rem 1.5rem;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);background:var(--color-background-primary);margin-bottom:1.5rem}
+.logo-circle{width:64px;height:64px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:22px;font-weight:500;color:#fff;letter-spacing:1px}
+.header h1{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.header p{font-size:14px;color:var(--color-text-secondary);line-height:1.5}
+.progress-bar{background:var(--color-background-secondary);border-radius:99px;height:6px;margin-bottom:0.5rem;overflow:hidden}
+.progress-fill{background:#1D9E75;height:100%;border-radius:99px;transition:width 0.4s ease}
+.progress-label{font-size:12px;color:var(--color-text-secondary);text-align:right;margin-bottom:1.5rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem;margin-bottom:1rem}
+.section-tag{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:99px;background:#E1F5EE;color:#0F6E56;margin-bottom:1rem;letter-spacing:0.5px;text-transform:uppercase}
+.step{display:none}
+.step.active{display:block}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--color-text-secondary);margin-bottom:6px}
+.field label .req{color:#D85A30}
+.field input[type=text],.field input[type=email],.field input[type=tel],.field input[type=number],.field textarea,.field select{width:100%;padding:10px 12px;font-size:14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);outline:none;transition:border-color 0.2s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:#1D9E75;box-shadow:0 0 0 3px rgba(29,158,117,0.12)}
+.field textarea{resize:vertical;min-height:90px;line-height:1.6}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.options{display:flex;flex-wrap:wrap;gap:8px}
+.opt-btn{padding:8px 14px;font-size:13px;border:0.5px solid var(--color-border-secondary);border-radius:99px;background:var(--color-background-primary);color:var(--color-text-primary);cursor:pointer;transition:all 0.15s;user-select:none}
+.opt-btn:hover{border-color:#1D9E75;color:#1D9E75}
+.opt-btn.selected{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.check-item{display:flex;align-items:center;gap:8px;padding:9px 12px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;font-size:13px;color:var(--color-text-primary);transition:all 0.15s;user-select:none}
+.check-item:hover{border-color:#1D9E75}
+.check-item.selected{background:#E1F5EE;border-color:#1D9E75;color:#0F6E56}
+.check-dot{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--color-border-secondary);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.check-item.selected .check-dot{background:#1D9E75;border-color:#1D9E75}
+.check-dot-inner{width:8px;height:8px;background:#fff;border-radius:2px;display:none}
+.check-item.selected .check-dot-inner{display:block}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:12px}
+.btn-back{padding:10px 20px;font-size:14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all 0.15s}
+.btn-back:hover{background:var(--color-background-secondary)}
+.btn-next{padding:10px 24px;font-size:14px;font-weight:500;border:none;border-radius:var(--border-radius-md);background:#1D9E75;color:#fff;cursor:pointer;transition:all 0.15s;flex:1;max-width:220px}
+.btn-next:hover{background:#0F6E56}
+.btn-submit{padding:12px 24px;font-size:14px;font-weight:500;border:none;border-radius:var(--border-radius-md);background:#1D9E75;color:#fff;cursor:pointer;transition:all 0.15s;width:100%}
+.btn-submit:hover{background:#0F6E56}
+.success{text-align:center;padding:3rem 1.5rem;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);background:var(--color-background-primary)}
+.success-icon{width:64px;height:64px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:28px}
+.success h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px}
+.success p{font-size:14px;color:var(--color-text-secondary);line-height:1.6}
+.hint{font-size:12px;color:var(--color-text-tertiary);margin-top:5px}
+.conditional{display:none}
+.conditional.visible{display:block}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1.25rem 0}
+</style>
+
+<div class="wrap">
+  <div class="header">
+    <div class="logo-circle">CE</div>
+    <h1>Carreira Em Foco</h1>
+    <p>Preencha este formulário para que possamos entender sua trajetória e encontrar a melhor solução para você.</p>
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill" id="pbar" style="width:16%"></div></div>
+  <div class="progress-label" id="plabel">Etapa 1 de 6</div>
+
+  <div id="form-steps">
+
+    <!-- STEP 1: Identificação -->
+    <div class="step active" id="s1">
+      <div class="card">
+        <div class="section-tag">Identificação</div>
+        <div class="row2">
+          <div class="field"><label>Nome <span class="req">*</span></label><input type="text" id="nome" placeholder="Seu nome"></div>
+          <div class="field"><label>Sobrenome <span class="req">*</span></label><input type="text" id="sobrenome" placeholder="Seu sobrenome"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Idade <span class="req">*</span></label><input type="number" id="idade" placeholder="Ex: 24" min="14" max="80"></div>
+          <div class="field"><label>Cidade / UF <span class="req">*</span></label><input type="text" id="cidade" placeholder="Ex: São Paulo / SP"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>WhatsApp <span class="req">*</span></label><input type="tel" id="whatsapp" placeholder="(00) 00000-0000"></div>
+          <div class="field"><label>E-mail <span class="req">*</span></label><input type="email" id="email" placeholder="seu@email.com"></div>
+        </div>
+        <div class="field"><label>LinkedIn <span style="color:var(--color-text-tertiary);font-weight:400">(opcional)</span></label><input type="text" id="linkedin" placeholder="linkedin.com/in/seu-perfil"></div>
+      </div>
+      <div class="nav">
+        <div></div>
+        <button class="btn-next" onclick="goNext(1)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Situação Atual -->
+    <div class="step" id="s2">
+      <div class="card">
+        <div class="section-tag">Situação atual</div>
+        <div class="field">
+          <label>Qual é a sua situação profissional hoje? <span class="req">*</span></label>
+          <div class="options" id="situacao">
+            <div class="opt-btn" onclick="pick(this,'situacao')">Empregado</div>
+            <div class="opt-btn" onclick="pick(this,'situacao')">Desempregado</div>
+            <div class="opt-btn" onclick="pick(this,'situacao')">Nunca trabalhei</div>
+            <div class="opt-btn" onclick="pick(this,'situacao')">Estudando</div>
+            <div class="opt-btn" onclick="pick(this,'situacao')">Freelancer / informal</div>
+          </div>
+        </div>
+        <div id="bloco-cargo" class="conditional">
+          <hr class="divider">
+          <div class="row2">
+            <div class="field"><label>Cargo atual</label><input type="text" id="cargo" placeholder="Ex: Assistente administrativo"></div>
+            <div class="field"><label>Tempo no cargo</label><input type="text" id="tempo" placeholder="Ex: 1 ano e 4 meses"></div>
+          </div>
+          <div class="field">
+            <label>Principais atividades realizadas</label>
+            <textarea id="atividades" placeholder="Descreva o que você faz no dia a dia — isso ajuda a montar um currículo mais estratégico."></textarea>
+          </div>
+          <div class="field">
+            <label>Deseja trocar de emprego?</label>
+            <div class="options" id="trocar">
+              <div class="opt-btn" onclick="pick(this,'trocar')">Sim</div>
+              <div class="opt-btn" onclick="pick(this,'trocar')">Não</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav">
+        <button class="btn-back" onclick="goBack(2)">← Voltar</button>
+        <button class="btn-next" onclick="goNext(2)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Objetivo -->
+    <div class="step" id="s3">
+      <div class="card">
+        <div class="section-tag">Objetivo profissional</div>
+        <div class="field">
+          <label>O que você está buscando? <span class="req">*</span></label>
+          <div class="options" id="objetivo">
+            <div class="opt-btn" onclick="pick(this,'objetivo')">Primeiro emprego</div>
+            <div class="opt-btn" onclick="pick(this,'objetivo')">Vaga melhor</div>
+            <div class="opt-btn" onclick="pick(this,'objetivo')">Jovem aprendiz</div>
+            <div class="opt-btn" onclick="pick(this,'objetivo')">Estágio</div>
+            <div class="opt-btn" onclick="pick(this,'objetivo')">Mudar de área</div>
+            <div class="opt-btn" onclick="pick(this,'objetivo')">Promoção</div>
+            <div class="opt-btn" onclick="pick(this,'objetivo')">Outro</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field">
+          <label>Áreas de interesse <span style="color:var(--color-text-tertiary);font-weight:400">(até 3)</span> <span class="req">*</span></label>
+          <div class="check-grid" id="areas">
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Administrativo</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>RH</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Financeiro</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Atendimento</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Vendas</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Marketing</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Logística</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Estoque</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Operacional</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Tecnologia</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Saúde</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Educação</div>
+            <div class="check-item" onclick="toggleCheck(this,'areas',3)"><div class="check-dot"><div class="check-dot-inner"></div></div>Outros</div>
+          </div>
+          <p class="hint">Selecione até 3 áreas</p>
+        </div>
+        <div class="field" id="campo-outras-areas" style="display:none">
+          <label>Quais outras áreas?</label>
+          <input type="text" id="outras-areas" placeholder="Descreva as áreas de interesse">
+        </div>
+      </div>
+      <div class="nav">
+        <button class="btn-back" onclick="goBack(3)">← Voltar</button>
+        <button class="btn-next" onclick="goNext(3)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Formação -->
+    <div class="step" id="s4">
+      <div class="card">
+        <div class="section-tag">Formação acadêmica</div>
+        <div class="field">
+          <label>Nível de escolaridade <span class="req">*</span></label>
+          <div class="options" id="escolaridade">
+            <div class="opt-btn" onclick="pick(this,'escolaridade')">Ensino médio incompleto</div>
+            <div class="opt-btn" onclick="pick(this,'escolaridade')">Ensino médio completo</div>
+            <div class="opt-btn" onclick="pick(this,'escolaridade')">Técnico em andamento</div>
+            <div class="opt-btn" onclick="pick(this,'escolaridade')">Técnico concluído</div>
+            <div class="opt-btn" onclick="pick(this,'escolaridade')">Faculdade em andamento</div>
+            <div class="opt-btn" onclick="pick(this,'escolaridade')">Faculdade concluída</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem">Cursos adicionais <span style="font-weight:400">(opcional)</span></p>
+        <div class="row2">
+          <div class="field"><label>Curso 1</label><input type="text" id="curso1" placeholder="Nome do curso"></div>
+          <div class="field"><label>Instituição 1</label><input type="text" id="inst1" placeholder="Nome da instituição"></div>
+        </div>
+        <div class="field"><label>Ano de conclusão 1</label><input type="text" id="conc1" placeholder="Ex: 2023"></div>
+        <hr class="divider">
+        <div class="row2">
+          <div class="field"><label>Curso 2</label><input type="text" id="curso2" placeholder="Nome do curso"></div>
+          <div class="field"><label>Instituição 2</label><input type="text" id="inst2" placeholder="Nome da instituição"></div>
+        </div>
+        <div class="field"><label>Ano de conclusão 2</label><input type="text" id="conc2" placeholder="Ex: 2024"></div>
+      </div>
+      <div class="nav">
+        <button class="btn-back" onclick="goBack(4)">← Voltar</button>
+        <button class="btn-next" onclick="goNext(4)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: Habilidades -->
+    <div class="step" id="s5">
+      <div class="card">
+        <div class="section-tag">Habilidades e diferenciais</div>
+        <div class="field">
+          <label>Marque suas habilidades</label>
+          <div class="check-grid" id="habilidades">
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Excel</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Word</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>PowerPoint</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Informática</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Atendimento</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Vendas</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Administração</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Organização</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Comunicação</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Liderança</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Inglês básico</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Inglês intermediário</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Canva</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Redes sociais</div>
+            <div class="check-item" onclick="toggleCheck(this,'habilidades',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Digitação</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field">
+          <label>Você tem algum diferencial?</label>
+          <div class="check-grid" id="diferenciais">
+            <div class="check-item" onclick="toggleCheck(this,'diferenciais',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Cursos livres</div>
+            <div class="check-item" onclick="toggleCheck(this,'diferenciais',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Certificados</div>
+            <div class="check-item" onclick="toggleCheck(this,'diferenciais',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>CNH</div>
+            <div class="check-item" onclick="toggleCheck(this,'diferenciais',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Disponibilidade total</div>
+            <div class="check-item" onclick="toggleCheck(this,'diferenciais',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Metas</div>
+            <div class="check-item" onclick="toggleCheck(this,'diferenciais',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Foco em resultados</div>
+            <div class="check-item" onclick="toggleCheck(this,'diferenciais',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Trabalho em equipe</div>
+            <div class="check-item" onclick="toggleCheck(this,'diferenciais',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Nenhum</div>
+          </div>
+        </div>
+      </div>
+      <div class="nav">
+        <button class="btn-back" onclick="goBack(5)">← Voltar</button>
+        <button class="btn-next" onclick="goNext(5)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 6: Disponibilidade e Trava -->
+    <div class="step" id="s6">
+      <div class="card">
+        <div class="section-tag">Disponibilidade</div>
+        <div class="field">
+          <label>Turnos e formato de trabalho</label>
+          <div class="check-grid" id="turnos">
+            <div class="check-item" onclick="toggleCheck(this,'turnos',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Manhã</div>
+            <div class="check-item" onclick="toggleCheck(this,'turnos',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Tarde</div>
+            <div class="check-item" onclick="toggleCheck(this,'turnos',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Noite</div>
+            <div class="check-item" onclick="toggleCheck(this,'turnos',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Escala</div>
+            <div class="check-item" onclick="toggleCheck(this,'turnos',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Fim de semana</div>
+            <div class="check-item" onclick="toggleCheck(this,'turnos',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Home office</div>
+            <div class="check-item" onclick="toggleCheck(this,'turnos',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Presencial</div>
+            <div class="check-item" onclick="toggleCheck(this,'turnos',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Híbrido</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field">
+          <label>O que mais trava você hoje?</label>
+          <div class="check-grid" id="trava">
+            <div class="check-item" onclick="toggleCheck(this,'trava',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Não sou chamado</div>
+            <div class="check-item" onclick="toggleCheck(this,'trava',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Sem experiência</div>
+            <div class="check-item" onclick="toggleCheck(this,'trava',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Currículo fraco</div>
+            <div class="check-item" onclick="toggleCheck(this,'trava',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Falta confiança</div>
+            <div class="check-item" onclick="toggleCheck(this,'trava',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Não sei por onde começar</div>
+            <div class="check-item" onclick="toggleCheck(this,'trava',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Não sei me vender</div>
+            <div class="check-item" onclick="toggleCheck(this,'trava',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Poucas vagas</div>
+            <div class="check-item" onclick="toggleCheck(this,'trava',99)"><div class="check-dot"><div class="check-dot-inner"></div></div>Outro</div>
+          </div>
+        </div>
+        <div class="field" id="campo-outra-trava" style="display:none">
+          <label>Qual outro?</label>
+          <input type="text" id="outra-trava" placeholder="Descreva sua situação">
+        </div>
+        <hr class="divider">
+        <button class="btn-submit" onclick="submitForm()">Enviar formulário</button>
+        <p style="font-size:12px;color:var(--color-text-tertiary);text-align:center;margin-top:10px">Nossa equipe entrará em contato pelo WhatsApp em breve.</p>
+      </div>
+      <div class="nav" style="justify-content:flex-start">
+        <button class="btn-back" onclick="goBack(6)">← Voltar</button>
+      </div>
+    </div>
+
+    <!-- STEP 7: Sucesso -->
+    <div class="step" id="s7">
+      <div class="success">
+        <div class="success-icon">&#10003;</div>
+        <h2>Formulário enviado com sucesso!</h2>
+        <p>Obrigado por confiar na <strong>Carreira Em Foco</strong>.<br>Nossa equipe vai analisar seu perfil e entrar em contato pelo WhatsApp em até 24 horas.</p>
+        <p style="margin-top:1rem;font-size:13px;color:var(--color-text-tertiary)">Fique de olho nas suas mensagens!</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var currentStep=1;var totalSteps=6;
+function showStep(n){document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active')});document.getElementById('s'+n).classList.add('active');var pct=Math.round((n/totalSteps)*100);document.getElementById('pbar').style.width=pct+'%';document.getElementById('plabel').textContent='Etapa '+n+' de '+totalSteps;}
+function goNext(n){if(n===1){var nome=document.getElementById('nome').value.trim();var email=document.getElementById('email').value.trim();var whatsapp=document.getElementById('whatsapp').value.trim();var cidade=document.getElementById('cidade').value.trim();var idade=document.getElementById('idade').value.trim();if(!nome||!email||!whatsapp||!cidade||!idade){alert('Por favor, preencha todos os campos obrigatórios.');return;}}currentStep=n+1;showStep(currentStep);}
+function goBack(n){currentStep=n-1;showStep(currentStep);}
+function pick(el,group){var siblings=document.querySelectorAll('#'+group+' .opt-btn');siblings.forEach(function(s){s.classList.remove('selected')});el.classList.add('selected');if(group==='situacao'){var bloco=document.getElementById('bloco-cargo');var val=el.textContent;if(val==='Empregado'||val==='Freelancer / informal'){bloco.classList.add('visible')}else{bloco.classList.remove('visible');}}}
+function toggleCheck(el,group,max){var siblings=document.querySelectorAll('#'+group+' .check-item');var selected=document.querySelectorAll('#'+group+' .check-item.selected');if(el.classList.contains('selected')){el.classList.remove('selected')}else{if(selected.length>=max){return;}el.classList.add('selected');}if(group==='areas'){var hasOutros=false;document.querySelectorAll('#areas .check-item.selected').forEach(function(s){if(s.textContent.trim()==='Outros')hasOutros=true;});document.getElementById('campo-outras-areas').style.display=hasOutros?'block':'none';}if(group==='trava'){var hasOutro=false;document.querySelectorAll('#trava .check-item.selected').forEach(function(s){if(s.textContent.trim()==='Outro')hasOutro=true;});document.getElementById('campo-outra-trava').style.display=hasOutro?'block':'none';}}
+function submitForm(){currentStep=7;document.getElementById('pbar').style.width='100%';document.getElementById('plabel').textContent='Concluído!';document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active')});document.getElementById('s7').classList.add('active');}
+</script>
